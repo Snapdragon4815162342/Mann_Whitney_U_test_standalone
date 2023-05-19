@@ -20,8 +20,8 @@ using namespace std;
 
 
 void mannwhitneyutest( 
-    vector<double> X,
-    vector<double> Y,
+    vector<double>& X,
+    vector<double>& Y,
     double& bothtails,
     double& lefttail,
     double& righttail
@@ -71,7 +71,6 @@ int main(){
 
     std::cout << "it took an average of " << float(mean_exec_time)/n_cycles << " ticks, or " << float(mean_exec_time)/n_cycles/CLOCKS_PER_SEC << "seconds." << std::endl;
     
-    
     std::cout<<"\n\n############################################################\n\n";
     std::cout<<"p both tails: "<<p_bothTails<<"\n";
     std::cout<<"p left tail: "<<p_leftTail<<"\n";
@@ -79,18 +78,32 @@ int main(){
     std::cout<<"\n############################################################\n\n";
 
     // //system("pause");
+    // std::cout<<"male:  ";
+    // for (int i=0; i<size(male);i++)
+    //     std::cout<<male[i]<<" ";
+    // std::cout<<"\n\nfemale: ";
+    // for (int i=0; i<size(female);i++)
+    //     std::cout<<female[i]<<" ";
 
     return 0;
 }
-
 //#########################################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
 // function implementations:
 
-
-
 void mannwhitneyutest( 
-    vector<double> X,
-    vector<double> Y,
+    vector<double>& X,
+    vector<double>& Y,
     double& bothtails,
     double& lefttail,
     double& righttail
@@ -108,7 +121,7 @@ void mannwhitneyutest(
 
         // ranking X (with Y attached)
         for (int i = 0; i < size(X); i++) {
-            int r = 1, s = 1;
+            int r = 1;
          
             for (int j = 0; j < size(X); j++) {
                 if (j != i && X[j] < X[i] )
@@ -133,6 +146,8 @@ void mannwhitneyutest(
         }
 
         int n0 = X_size, n1 = size(X)-X_size;
+        //now i can restore X to the original size
+        X.erase(X.end()-n1, X.end());
         // std::cout<<"n0: "<<n0<<"\n";
         // std::cout<<"n1: "<<n1<<"\n";
         // std::cout<<"T0: "<<T0<<"\n";
