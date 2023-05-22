@@ -32,8 +32,9 @@ void mannwhitneyutest(
 
 int main(){
 
-    //vector<double> male = {45, 33, 35, 39, 42};
-    //vector<double> female = {34, 36, 41, 43, 44, 37};
+//    vector<double> male {45, 33, 35, 39, 42};
+//    vector<double> female {34, 36, 41, 43, 44, 37};
+
 
 
     //generate random values
@@ -53,7 +54,7 @@ int main(){
     //timing function execution
     int start = 0, end = 0;
     double mean_exec_time = 0;
-    int n_cycles = 25;
+    int n_cycles = 10;
     for(int i = 0; i < n_cycles; i++){
         start = clock();
 
@@ -121,14 +122,17 @@ void mannwhitneyutest(
 
         // ranking X (with Y attached)
         for (int i = 0; i < size(X); i++) {
-            int r = 1;
+            int r = 1, s=1;
          
             for (int j = 0; j < size(X); j++) {
                 if (j != i && X[j] < X[i] )
                     r += 1; 
+                if (j != i && X[j] == X[i])
+                s += 1;   
                 }
+                
             
-            RankVec[i] = r;
+            RankVec[i] = r + (float)(s - 1) / (float) 2;
         }
         // std::cout<<"Rank vector: ";
         // for (int i = 0; i < n; i++)
